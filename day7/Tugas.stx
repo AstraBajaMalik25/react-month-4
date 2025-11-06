@@ -1,0 +1,97 @@
+import React, { useState } from "react";
+import { View, Button, StyleSheet, Text, SafeAreaView } from "react-native";
+
+const App = () => {
+  const [flexDirection, setFlexDirection] = useState<"row" | "column" | "row-reverse">("row");
+  const [justifyContent, setJustifyContent] = useState<"flex-start" | "center" | "space-between">("flex-start");
+  const [alignItems, setAlignItems] = useState<"flex-start" | "center" | "stretch">("flex-start");
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Flexbox Playground</Text>
+
+      {/* Area kotak */}
+      <View
+        style={[
+          styles.boxContainer,
+          {
+            flexDirection,
+            justifyContent,
+            alignItems,
+          },
+        ]}
+      >
+        <View style={[styles.box, { backgroundColor: "red" }]} />
+        <View style={[styles.box, { backgroundColor: "blue" }]} />
+        <View style={[styles.box, { backgroundColor: "green" }]} />
+      </View>
+
+      {/* Tombol pengaturan */}
+      <View style={styles.buttonGroup}>
+        <Text style={styles.label}>flexDirection</Text>
+        <View style={styles.row}>
+          <Button title="Row" onPress={() => setFlexDirection("row")} />
+          <Button title="Column" onPress={() => setFlexDirection("column")} />
+          <Button title="Row-Reverse" onPress={() => setFlexDirection("row-reverse")} />
+        </View>
+      </View>
+
+      <View style={styles.buttonGroup}>
+        <Text style={styles.label}>justifyContent</Text>
+        <View style={styles.row}>
+          <Button title="Start" onPress={() => setJustifyContent("flex-start")} />
+          <Button title="Center" onPress={() => setJustifyContent("center")} />
+          <Button title="Space-Between" onPress={() => setJustifyContent("space-between")} />
+        </View>
+      </View>
+
+      <View style={styles.buttonGroup}>
+        <Text style={styles.label}>alignItems</Text>
+        <View style={styles.row}>
+          <Button title="Start" onPress={() => setAlignItems("flex-start")} />
+          <Button title="Center" onPress={() => setAlignItems("center")} />
+          <Button title="Stretch" onPress={() => setAlignItems("stretch")} />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#f9f9f9",
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  boxContainer: {
+    flex: 1,
+    backgroundColor: "#ddd",
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  box: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+  },
+  buttonGroup: {
+    marginBottom: 12,
+  },
+  label: {
+    fontWeight: "bold",
+    marginBottom: 6,
+    textAlign: "center",
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
+
+export default App;
